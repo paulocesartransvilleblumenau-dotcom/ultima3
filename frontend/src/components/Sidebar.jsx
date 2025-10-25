@@ -48,7 +48,7 @@ const Sidebar = () => {
     { name: 'Fórmula 1', icon: GiRaceCar, path: '/formula-1' },
     { name: 'Vôlei de Praia', icon: TbBallVolleyball, path: '/volei-praia' },
     { name: 'Rugby', icon: GiRugbyConversion, path: '/rugby' },
-    { name: 'Motociclismo', icon: GiMotorcycle, path: '/motociclismo' },
+    { name: 'Motociclismo', icon: FaMotorcycle, path: '/motociclismo' },
     { name: 'Especiais', icon: MdStar, path: '/especiais' },
     { name: 'Handebol', icon: IoBasketball, path: '/handebol' },
   ];
