@@ -8,39 +8,39 @@ const LandingAfterLogin = () => {
     <div className="flex-1 overflow-y-auto" data-testid="landing-after-login">
       {/* Hero Section */}
       <section 
-        className="relative h-[500px] bg-cover bg-center"
+        className="relative h-[550px] bg-cover bg-center"
         style={{
-          backgroundImage: "linear-gradient(rgba(0, 0, 139, 0.8), rgba(0, 0, 139, 0.8)), url('https://images.unsplash.com/photo-1663298954428-c15bbe3c8100?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwyfHxzdGFkaXVtJTIwZm9vdGJhbGwlMjBicmF6aWx8ZW58MHx8fHwxNzYxMTU3NjY2fDA&ixlib=rb-4.1.0&q=85')"
+          backgroundImage: "linear-gradient(rgba(30, 58, 95, 0.85), rgba(15, 38, 68, 0.85)), url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1600&q=80')"
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center">
           <div className="grid md:grid-cols-2 gap-8 items-center w-full">
             <div className="text-white space-y-6">
-              <div className="inline-block bg-yellow-500 text-blue-900 px-6 py-2 rounded-full font-bold text-sm animate-pulse">
-                🎉 PROMOÇÃO ESPECIAL
+              <div className="inline-block bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-8 py-3 rounded-full font-bold text-base shadow-lg animate-pulse">
+                🎉 PROMOÇÃO ESPECIAL PARA A SUA CONTA
               </div>
-              <h2 className="text-6xl font-extrabold text-yellow-400">
+              <h2 className="text-7xl font-extrabold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
                 500% DE BÔNUS
               </h2>
-              <p className="text-2xl font-semibold">
-                Deposite acima de R$ 100 e ganhe 500% de Bônus imediatamente para usar como quiser.
+              <p className="text-2xl font-medium text-gray-100 leading-relaxed">
+                Faça seu primeiro depósito acima de <span className="text-yellow-400 font-bold">R$ 100</span> e receba <span className="text-yellow-400 font-bold">500% de bônus</span> instantaneamente na sua conta.
               </p>
               <button 
                 onClick={() => navigate('/escolher-valor')}
-                className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 px-12 py-4 rounded-xl font-bold text-xl transition transform hover:scale-105 shadow-2xl"
+                className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-gray-900 px-14 py-5 rounded-xl font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
                 data-testid="depositar-btn"
               >
                 DEPOSITAR AGORA
               </button>
-              <p className="text-sm text-gray-300">
-                * Promoção com limite de Bônus de 5 Mil reais.
+              <p className="text-sm text-gray-300 italic">
+                * Promoção válida com limite máximo de bônus de R$ 5.000,00
               </p>
             </div>
             <div className="hidden md:block">
               <img 
-                src="https://images.unsplash.com/photo-1676270891810-7da36dd02c85?crop=entropy&cs=srgb&fm=jpg&q=85"
-                alt="App Aposta Bet Nacional"
-                className="w-full max-w-md mx-auto drop-shadow-2xl rounded-lg"
+                src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80"
+                alt="Torcida vibrante no estádio"
+                className="w-full max-w-lg mx-auto drop-shadow-2xl rounded-2xl"
               />
             </div>
           </div>
