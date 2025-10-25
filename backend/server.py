@@ -138,44 +138,30 @@ async def save_pix_config(config: PixConfig):
 async def generate_pix_code(amount: float):
     """Generate PIX code based on configuration"""
     try:
-        from pixqrcodegen import Payload
-        import unicodedata
+        from pybrcode import create_pix
         
         config = await db.pix_config.find_one({}, {"_id": 0})
         
         if not config:
             raise HTTPException(status_code=404, detail="Configuração PIX não encontrada")
         
-        # Função para remover acentos
-        def remover_acentos(texto):
-            nfkd = unicodedata.normalize('NFKD', texto)
-            texto_sem_acento = "".join([c for c in nfkd if not unicodedata.combining(c)])
-            return texto_sem_acento.upper()
-        
-        # Preparar dados sem acentos
-        nome_limpo = remover_acentos(config['nome_beneficiario'])[:25]
-        cidade_limpa = remover_acentos(config['cidade'])[:15]
-        valor_str = f"{amount:.2f}"  # Formato: 100.00
-        
-        # Criar payload PIX usando pixqrcodegen
-        payload = Payload(
-            nome=nome_limpo,
-            chavepix=config['chave_pix'],
-            valor=valor_str,
-            cidade=cidade_limpa,
-            txtId='***'
+        # Gerar código PIX usando pybrcode (biblioteca mais confiável)
+        pix_payload = create_pix(
+            key=config['chave_pix'],
+            name=config['nome_beneficiario'],
+            city=config['cidade'],
+            value=amount,
+            txid='***'
         )
         
-        # Gerar código PIX EMV válido
-        pix_code = payload.gerarPayload()
-        
-        logger.info(f"PIX gerado - Nome: {nome_limpo}, Chave: {config['chave_pix']}, Valor: {valor_str}, Cidade: {cidade_limpa}")
+        logger.info(f"PIX gerado - Chave: {config['chave_pix']}, Nome: {config['nome_beneficiario']}, Valor: {amount}, Cidade: {config['cidade']}")
+        logger.info(f"Payload gerado: {pix_payload}")
         
         return {
             "status": "success",
-            "pix_code": pix_code,
+            "pix_code": pix_payload,
             "chave_pix": config['chave_pix'],
-            "nome_beneficiario": nome_limpo,
+            "nome_beneficiario": config['nome_beneficiario'],
             "valor": amount
         }
     except Exception as e:
