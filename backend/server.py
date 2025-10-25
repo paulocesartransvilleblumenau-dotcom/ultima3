@@ -37,6 +37,16 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
+class PixConfig(BaseModel):
+    chave_pix: str
+    tipo_chave: str  # cpf, cnpj, email, telefone, aleatoria
+    nome_beneficiario: str
+    cidade: str
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
