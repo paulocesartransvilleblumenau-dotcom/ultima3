@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { IoPersonCircle } from 'react-icons/io5';
 
 const Header = ({ onLoginClick }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+      } catch (e) {
+        console.error('Error parsing user data:', e);
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    if (window.confirm('Deseja realmente sair?')) {
+      localStorage.removeItem('user');
+      setUser(null);
+      navigate('/');
+    }
+  };
 
   return (
     <header data-testid="header" className="bg-[#0D1B3A] border-b border-[#1a3a52] sticky top-0 z-50">
