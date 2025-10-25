@@ -10,8 +10,7 @@ import {
   IoBasketball,
   IoTennisball,
   IoAmericanFootball,
-  IoBaseballOutline,
-  IoClose
+  IoBaseballOutline
 } from 'react-icons/io5';
 import { 
   GiTigerHead,
@@ -25,7 +24,7 @@ import { MdSportsVolleyball, MdStar } from 'react-icons/md';
 import { FaTableTennis, FaMotorcycle } from 'react-icons/fa';
 import { TbBallVolleyball } from 'react-icons/tb';
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
