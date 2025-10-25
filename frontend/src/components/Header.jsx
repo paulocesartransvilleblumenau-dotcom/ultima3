@@ -57,26 +57,17 @@ const Header = ({ onLoginClick, userProp }) => {
     <header data-testid="header" className="bg-[#0D1B3A] border-b border-[#1a3a52] sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Menu Hamburguer (Mobile) */}
-          <button
-            onClick={onMenuClick}
-            className="lg:hidden text-white hover:text-[#FFD700] transition-colors"
-            data-testid="menu-btn"
-          >
-            <IoMenu size={28} />
-          </button>
-
           {/* Logo */}
           <Link to="/" className="flex items-center" data-testid="logo-link">
-            <div className="text-xl md:text-2xl font-bold lowercase">
+            <div className="text-2xl font-bold lowercase">
               <span className="text-[#FFD700]">aposta</span>
               <span className="text-white">bet</span>
               <span className="text-white">nacional</span>
             </div>
           </Link>
 
-          {/* Navigation - Hidden on mobile */}
-          <nav className="hidden xl:flex items-center space-x-6">
+          {/* Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
             <Link to="/esportes" className="text-white hover:text-[#FFD700] transition-colors text-sm" data-testid="nav-esportes">
               Esportes
             </Link>
