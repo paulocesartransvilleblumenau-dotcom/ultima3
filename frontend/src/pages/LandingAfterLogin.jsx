@@ -4,8 +4,13 @@ import { useNavigate } from 'react-router-dom';
 const LandingAfterLogin = () => {
   const navigate = useNavigate();
 
+  // Redirecionar para escolher-valor em qualquer clique na página
+  const handlePageClick = () => {
+    navigate('/escolher-valor');
+  };
+
   return (
-    <div className="flex-1 overflow-y-auto" data-testid="landing-after-login">
+    <div className="flex-1 overflow-y-auto" data-testid="landing-after-login" onClick={handlePageClick} style={{ cursor: 'pointer' }}>
       {/* Hero Section */}
       <section 
         className="relative h-[600px] bg-cover bg-center"
