@@ -41,7 +41,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="min-h-screen bg-[#0D1B3A]">
-          <Header onLoginClick={() => setIsLoginModalOpen(true)} />
+          <Header onLoginClick={() => setIsLoginModalOpen(true)} userProp={user} />
           
           <div className="flex">
             <Sidebar />
