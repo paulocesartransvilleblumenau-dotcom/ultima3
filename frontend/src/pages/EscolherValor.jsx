@@ -72,6 +72,10 @@ const EscolherValor = () => {
     return value.toFixed(2).replace('.', ',');
   };
 
+  const formatNumber = (value) => {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   return (
     <div className="flex-1 overflow-y-auto bg-gradient-to-br from-[#0a1628] to-[#1a3a52] min-h-screen p-5" data-testid="escolher-valor-page">
       <div className="max-w-[800px] mx-auto py-10 px-5">
