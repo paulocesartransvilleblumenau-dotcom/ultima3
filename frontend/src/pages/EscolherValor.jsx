@@ -114,10 +114,10 @@ const EscolherValor = () => {
               data-testid={`value-card-${preset.amount}`}
             >
               <div className="text-white text-3xl font-black mb-2.5">
-                R$ {preset.amount}
+                R$ {formatNumber(preset.amount)}
               </div>
               <div className="text-[#00ff00] text-sm font-bold">
-                + R$ {preset.bonus} bônus
+                + R$ {formatNumber(preset.bonus)}
               </div>
             </div>
           ))}
