@@ -51,6 +51,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/landing" element={<LandingAfterLogin />} />
+                <Route path="/escolher-valor" element={<EscolherValor />} />
                 <Route path="/esportes" element={<HomePage />} />
                 <Route path="/ao-vivo" element={<HomePage />} />
                 <Route path="/melhores-listas" element={<HomePage />} />
@@ -61,7 +62,6 @@ function App() {
                 <Route path="/aviator" element={<HomePage />} />
                 <Route path="/mines" element={<HomePage />} />
                 <Route path="/cadastro" element={<LandingPage />} />
-                <Route path="/escolher-valor" element={<LandingPage />} />
               </Routes>
             </main>
           </div>
