@@ -86,7 +86,10 @@ const Sidebar = () => {
             className="flex items-center space-x-3 px-4 py-3 hover:bg-[#1a3a52] rounded-lg transition-colors group"
             data-testid={`sidebar-item-${category.name.toLowerCase().replace(/\s+/g, '-')}`}
           >
-            <category.icon className="text-white text-xl group-hover:text-[#FFD700] transition-colors" />
+            <category.icon 
+              className="text-xl group-hover:text-[#FFD700] transition-colors" 
+              style={{ color: category.color }}
+            />
             <span className="text-white text-sm group-hover:text-[#FFD700] transition-colors flex-1">
               {category.name}
             </span>
