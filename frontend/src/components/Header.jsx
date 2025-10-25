@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { IoPersonCircle } from 'react-icons/io5';
+import { IoPersonCircle, IoMenu } from 'react-icons/io5';
 
-const Header = ({ onLoginClick, userProp }) => {
+const Header = ({ onLoginClick, userProp, onMenuClick }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
