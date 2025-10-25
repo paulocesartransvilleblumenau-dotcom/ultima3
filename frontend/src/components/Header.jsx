@@ -76,21 +76,40 @@ const Header = ({ onLoginClick }) => {
 
           {/* Action Buttons */}
           <div className="flex items-center space-x-3">
-            <Button 
-              onClick={() => navigate('/cadastro')}
-              variant="outline" 
-              className="bg-white text-[#0D1B3A] hover:bg-gray-100 border-none"
-              data-testid="criar-conta-btn"
-            >
-              Criar Conta
-            </Button>
-            <Button 
-              onClick={onLoginClick}
-              className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white"
-              data-testid="entrar-btn"
-            >
-              Entrar
-            </Button>
+            {user ? (
+              <>
+                <div className="flex items-center space-x-2 text-white">
+                  <IoPersonCircle className="text-2xl text-yellow-400" />
+                  <span className="text-sm font-semibold" data-testid="user-name">{user.username}</span>
+                </div>
+                <Button 
+                  onClick={handleLogout}
+                  variant="outline" 
+                  className="bg-red-600 text-white hover:bg-red-700 border-none"
+                  data-testid="sair-btn"
+                >
+                  Sair
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button 
+                  onClick={() => navigate('/cadastro')}
+                  variant="outline" 
+                  className="bg-white text-[#0D1B3A] hover:bg-gray-100 border-none"
+                  data-testid="criar-conta-btn"
+                >
+                  Criar Conta
+                </Button>
+                <Button 
+                  onClick={onLoginClick}
+                  className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white"
+                  data-testid="entrar-btn"
+                >
+                  Entrar
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
