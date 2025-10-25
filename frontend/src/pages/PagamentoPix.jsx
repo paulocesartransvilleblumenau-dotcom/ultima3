@@ -11,9 +11,8 @@ const PagamentoPix = () => {
   const [copied, setCopied] = useState(false);
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutos
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
-
-  // Código PIX (exemplo - em produção seria gerado pelo backend)
-  const pixCode = '00020126580014br.gov.bcb.pix0136a629532e-7693-4846-852d-1bbdefdef5245204000053039865802BR5925APOSTA BET NACIONAL LTDA6009SAO PAULO62410503***50300017br.gov.bcb.brcode01051.0.063041D3A';
+  const [pixCode, setPixCode] = useState('');
+  const [pixInfo, setPixInfo] = useState(null);
 
   useEffect(() => {
     // Carregar valores do localStorage
@@ -29,7 +28,27 @@ const PagamentoPix = () => {
     setDepositAmount(deposit);
     setBonusAmount(bonus);
     setTotalAmount(deposit + bonus);
+    
+    // Buscar código PIX do backend
+    generatePixCode(deposit);
   }, [navigate]);
+
+  const generatePixCode = async (amount) => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/api/pix/generate-code?amount=${amount}`);
+      if (response.data.status === 'success') {
+        setPixCode(response.data.pix_code);
+        setPixInfo({
+          chave: response.data.chave_pix,
+          beneficiario: response.data.nome_beneficiario
+        });
+      }
+    } catch (err) {
+      console.error('Erro ao gerar código PIX:', err);
+      // Código PIX de fallback
+      setPixCode('00020126580014br.gov.bcb.pix0136a629532e-7693-4846-852d-1bbdefdef5245204000053039865802BR5925APOSTA BET NACIONAL LTDA6009SAO PAULO62410503***50300017br.gov.bcb.brcode01051.0.063041D3A');
+    }
+  };
 
   useEffect(() => {
     // Countdown timer
