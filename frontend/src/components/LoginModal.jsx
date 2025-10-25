@@ -47,6 +47,9 @@ const LoginModal = ({ isOpen, onClose, onSuccess }) => {
       }
       
       onClose();
+      
+      // Redirect to landing page after successful login
+      navigate('/landing');
     } catch (err) {
       console.error('Erro ao fazer login:', err);
       setError('Erro ao fazer login. Tente novamente.');
