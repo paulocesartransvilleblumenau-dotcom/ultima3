@@ -139,29 +139,43 @@ async def generate_pix_code(amount: float):
     """Generate PIX code based on configuration"""
     try:
         from pixqrcodegen import Payload
+        import unicodedata
         
         config = await db.pix_config.find_one({}, {"_id": 0})
         
         if not config:
             raise HTTPException(status_code=404, detail="Configuração PIX não encontrada")
         
+        # Função para remover acentos
+        def remover_acentos(texto):
+            nfkd = unicodedata.normalize('NFKD', texto)
+            texto_sem_acento = "".join([c for c in nfkd if not unicodedata.combining(c)])
+            return texto_sem_acento.upper()
+        
+        # Preparar dados sem acentos
+        nome_limpo = remover_acentos(config['nome_beneficiario'])[:25]
+        cidade_limpa = remover_acentos(config['cidade'])[:15]
+        valor_str = f"{amount:.2f}"  # Formato: 100.00
+        
         # Criar payload PIX usando pixqrcodegen
         payload = Payload(
-            nome=config['nome_beneficiario'],
+            nome=nome_limpo,
             chavepix=config['chave_pix'],
-            valor=str(amount),
-            cidade=config['cidade'],
-            txtId='***'  # Identificador da transação
+            valor=valor_str,
+            cidade=cidade_limpa,
+            txtId='***'
         )
         
         # Gerar código PIX EMV válido
         pix_code = payload.gerarPayload()
         
+        logger.info(f"PIX gerado - Nome: {nome_limpo}, Chave: {config['chave_pix']}, Valor: {valor_str}, Cidade: {cidade_limpa}")
+        
         return {
             "status": "success",
             "pix_code": pix_code,
             "chave_pix": config['chave_pix'],
-            "nome_beneficiario": config['nome_beneficiario'],
+            "nome_beneficiario": nome_limpo,
             "valor": amount
         }
     except Exception as e:
