@@ -20,7 +20,7 @@ import {
   GiRaceCar,
   GiRugbyConversion
 } from 'react-icons/gi';
-import { MdSportsVolleyball, MdStar, MdSportsMo torSports } from 'react-icons/md';
+import { MdSportsVolleyball, MdStar } from 'react-icons/md';
 import { FaTableTennis, FaMotorcycle } from 'react-icons/fa';
 import { TbBallVolleyball } from 'react-icons/tb';
 
