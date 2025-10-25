@@ -8,6 +8,7 @@ import LoginModal from "@/components/LoginModal";
 import HomePage from "@/pages/HomePage";
 import LandingPage from "@/pages/LandingPage";
 import LandingAfterLogin from "@/pages/LandingAfterLogin";
+import EscolherValor from "@/pages/EscolherValor";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
