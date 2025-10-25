@@ -103,9 +103,18 @@ const Header = ({ onLoginClick, userProp }) => {
           <div className="flex items-center space-x-3">
             {user ? (
               <>
-                <div className="flex items-center space-x-2 text-white">
-                  <IoPersonCircle className="text-2xl text-yellow-400" />
-                  <span className="text-sm font-semibold" data-testid="user-name">{user.username}</span>
+                <div className="flex items-center space-x-3">
+                  <IoPersonCircle className="text-4xl text-yellow-400" />
+                  <div className="flex flex-col">
+                    <span className="text-white text-sm font-semibold" data-testid="user-name">{user.username}</span>
+                    <button
+                      onClick={() => navigate('/escolher-valor')}
+                      className="text-[#00ff00] text-sm font-bold hover:text-[#33ff33] transition-colors text-left"
+                      data-testid="depositar-header-btn"
+                    >
+                      Depositar
+                    </button>
+                  </div>
                 </div>
                 <Button 
                   onClick={handleLogout}
