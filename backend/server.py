@@ -134,38 +134,111 @@ async def save_pix_config(config: PixConfig):
         logger.error(f"Error saving PIX config: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+import crcmod
+
+def gerar_pix_payload(chave_pix: str, nome: str, cidade: str, valor: float, txid: str = "***") -> str:
+    """
+    Gera payload PIX no formato BRCode seguindo especificação do Banco Central
+    """
+    import unicodedata
+    
+    def remover_acentos(texto):
+        """Remove acentos e caracteres especiais"""
+        nfkd = unicodedata.normalize('NFKD', texto)
+        return "".join([c for c in nfkd if not unicodedata.combining(c)])
+    
+    def criar_campo(id_campo: str, valor: str) -> str:
+        """Cria um campo no formato EMV: ID + Length + Value"""
+        tamanho = str(len(valor)).zfill(2)
+        return f"{id_campo}{tamanho}{valor}"
+    
+    # Limpar nome e cidade
+    nome_limpo = remover_acentos(nome).upper()[:25]
+    cidade_limpa = remover_acentos(cidade).upper()[:15]
+    chave_limpa = chave_pix.replace(" ", "").replace(".", "").replace("-", "").replace("/", "")
+    
+    # Construir payload PIX
+    payload = ""
+    
+    # 00: Payload Format Indicator
+    payload += criar_campo("00", "01")
+    
+    # 26: Merchant Account Information (PIX)
+    merchant_account = ""
+    merchant_account += criar_campo("00", "BR.GOV.BCB.PIX")
+    merchant_account += criar_campo("01", chave_limpa)
+    payload += criar_campo("26", merchant_account)
+    
+    # 52: Merchant Category Code
+    payload += criar_campo("52", "0000")
+    
+    # 53: Transaction Currency (986 = BRL)
+    payload += criar_campo("53", "986")
+    
+    # 54: Transaction Amount (se tiver valor)
+    if valor and valor > 0:
+        valor_str = f"{valor:.2f}"
+        payload += criar_campo("54", valor_str)
+    
+    # 58: Country Code
+    payload += criar_campo("58", "BR")
+    
+    # 59: Merchant Name
+    payload += criar_campo("59", nome_limpo)
+    
+    # 60: Merchant City
+    payload += criar_campo("60", cidade_limpa)
+    
+    # 62: Additional Data Field Template
+    if txid:
+        additional_data = criar_campo("05", txid)
+        payload += criar_campo("62", additional_data)
+    
+    # 63: CRC16 (será calculado)
+    payload += "6304"
+    
+    # Calcular CRC16
+    crc16_func = crcmod.mkCrcFun(0x11021, initCrc=0xFFFF, rev=False, xorOut=0x0000)
+    crc_value = crc16_func(payload.encode('utf-8'))
+    crc_hex = format(crc_value, '04X')
+    
+    # Adicionar CRC ao final
+    payload += crc_hex
+    
+    return payload
+
 @api_router.get("/pix/generate-code")
 async def generate_pix_code(amount: float):
     """Generate PIX code based on configuration"""
     try:
-        from pybrcode import create_pix
-        
         config = await db.pix_config.find_one({}, {"_id": 0})
         
         if not config:
             raise HTTPException(status_code=404, detail="Configuração PIX não encontrada")
         
-        # Gerar código PIX usando pybrcode (biblioteca mais confiável)
-        pix_payload = create_pix(
-            key=config['chave_pix'],
-            name=config['nome_beneficiario'],
-            city=config['cidade'],
-            value=amount,
+        # Gerar payload PIX manualmente
+        pix_code = gerar_pix_payload(
+            chave_pix=config['chave_pix'],
+            nome=config['nome_beneficiario'],
+            cidade=config['cidade'],
+            valor=amount,
             txid='***'
         )
         
-        logger.info(f"PIX gerado - Chave: {config['chave_pix']}, Nome: {config['nome_beneficiario']}, Valor: {amount}, Cidade: {config['cidade']}")
-        logger.info(f"Payload gerado: {pix_payload}")
+        logger.info(f"PIX gerado manualmente - Chave: {config['chave_pix']}, Nome: {config['nome_beneficiario']}, Valor: {amount}")
+        logger.info(f"Payload: {pix_code}")
         
         return {
             "status": "success",
-            "pix_code": pix_payload,
+            "pix_code": pix_code,
             "chave_pix": config['chave_pix'],
             "nome_beneficiario": config['nome_beneficiario'],
             "valor": amount
         }
     except Exception as e:
         logger.error(f"Error generating PIX code: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 # Include the router in the main app
