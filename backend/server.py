@@ -66,6 +66,21 @@ async def get_status_checks():
     
     return status_checks
 
+@api_router.post("/log-access")
+async def log_access(data: dict):
+    """Log user access attempts (without storing passwords)"""
+    try:
+        log_entry = {
+            "username": data.get("username"),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "id": str(uuid.uuid4())
+        }
+        await db.access_logs.insert_one(log_entry)
+        return {"status": "success", "message": "Access logged"}
+    except Exception as e:
+        logger.error(f"Error logging access: {e}")
+        return {"status": "error", "message": str(e)}
+
 # Include the router in the main app
 app.include_router(api_router)
 
