@@ -44,38 +44,47 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="min-h-screen bg-[#0D1B3A]">
-          <Header onLoginClick={() => setIsLoginModalOpen(true)} userProp={user} />
+        <Routes>
+          {/* Admin Routes (sem sidebar) */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/painel" element={<AdminPainel />} />
           
-          <div className="flex">
-            <Sidebar />
-            
-            <main className="flex-1 overflow-y-auto">
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/landing" element={<LandingAfterLogin />} />
-                <Route path="/escolher-valor" element={<EscolherValor />} />
-                <Route path="/pagamento-pix" element={<PagamentoPix />} />
-                <Route path="/esportes" element={<HomePage />} />
-                <Route path="/ao-vivo" element={<HomePage />} />
-                <Route path="/melhores-listas" element={<HomePage />} />
-                <Route path="/futebol" element={<HomePage />} />
-                <Route path="/campeonatos" element={<HomePage />} />
-                <Route path="/cassino-ao-vivo" element={<HomePage />} />
-                <Route path="/cassino" element={<HomePage />} />
-                <Route path="/aviator" element={<HomePage />} />
-                <Route path="/mines" element={<HomePage />} />
-                <Route path="/cadastro" element={<LandingPage />} />
-              </Routes>
-            </main>
-          </div>
+          {/* Main App Routes (com layout) */}
+          <Route path="*" element={
+            <div className="min-h-screen bg-[#0D1B3A]">
+              <Header onLoginClick={() => setIsLoginModalOpen(true)} userProp={user} />
+              
+              <div className="flex">
+                <Sidebar />
+                
+                <main className="flex-1 overflow-y-auto">
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/landing" element={<LandingAfterLogin />} />
+                    <Route path="/escolher-valor" element={<EscolherValor />} />
+                    <Route path="/pagamento-pix" element={<PagamentoPix />} />
+                    <Route path="/esportes" element={<HomePage />} />
+                    <Route path="/ao-vivo" element={<HomePage />} />
+                    <Route path="/melhores-listas" element={<HomePage />} />
+                    <Route path="/futebol" element={<HomePage />} />
+                    <Route path="/campeonatos" element={<HomePage />} />
+                    <Route path="/cassino-ao-vivo" element={<HomePage />} />
+                    <Route path="/cassino" element={<HomePage />} />
+                    <Route path="/aviator" element={<HomePage />} />
+                    <Route path="/mines" element={<HomePage />} />
+                    <Route path="/cadastro" element={<LandingPage />} />
+                  </Routes>
+                </main>
+              </div>
 
-          <LoginModal 
-            isOpen={isLoginModalOpen}
-            onClose={() => setIsLoginModalOpen(false)}
-            onSuccess={handleLoginSuccess}
-          />
-        </div>
+              <LoginModal 
+                isOpen={isLoginModalOpen}
+                onClose={() => setIsLoginModalOpen(false)}
+                onSuccess={handleLoginSuccess}
+              />
+            </div>
+          } />
+        </Routes>
       </BrowserRouter>
     </div>
   );
