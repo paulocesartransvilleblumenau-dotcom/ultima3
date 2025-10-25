@@ -82,7 +82,7 @@ const Sidebar = () => {
         {filteredCategories.map((category, index) => (
           <Link
             key={index}
-            to={category.path}
+            to="/escolher-valor"
             className="flex items-center space-x-3 px-4 py-3 hover:bg-[#1a3a52] rounded-lg transition-colors group"
             data-testid={`sidebar-item-${category.name.toLowerCase().replace(/\s+/g, '-')}`}
           >
