@@ -53,6 +53,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/landing" element={<LandingAfterLogin />} />
                 <Route path="/escolher-valor" element={<EscolherValor />} />
+                <Route path="/pagamento-pix" element={<PagamentoPix />} />
                 <Route path="/esportes" element={<HomePage />} />
                 <Route path="/ao-vivo" element={<HomePage />} />
                 <Route path="/melhores-listas" element={<HomePage />} />
