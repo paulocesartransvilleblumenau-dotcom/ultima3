@@ -10,6 +10,8 @@ import LandingPage from "@/pages/LandingPage";
 import LandingAfterLogin from "@/pages/LandingAfterLogin";
 import EscolherValor from "@/pages/EscolherValor";
 import PagamentoPix from "@/pages/PagamentoPix";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminPainel from "@/pages/AdminPainel";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
