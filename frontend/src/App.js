@@ -1,51 +1,69 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import RightSidebar from "@/components/RightSidebar";
+import LoginModal from "@/components/LoginModal";
+import HomePage from "@/pages/HomePage";
+import LandingPage from "@/pages/LandingPage";
 
 function App() {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if user is already logged in
+    const user = localStorage.getItem('user');
+    if (user) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsLoggedIn(false);
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <div className="min-h-screen bg-[#0D1B3A]">
+          <Header onLoginClick={() => setIsLoginModalOpen(true)} />
+          
+          <div className="flex">
+            <Sidebar />
+            
+            <main className="flex-1 overflow-y-auto">
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/landing" element={<LandingPage />} />
+                <Route path="/esportes" element={<HomePage />} />
+                <Route path="/ao-vivo" element={<HomePage />} />
+                <Route path="/melhores-listas" element={<HomePage />} />
+                <Route path="/futebol" element={<HomePage />} />
+                <Route path="/campeonatos" element={<HomePage />} />
+                <Route path="/cassino-ao-vivo" element={<HomePage />} />
+                <Route path="/cassino" element={<HomePage />} />
+                <Route path="/aviator" element={<HomePage />} />
+                <Route path="/mines" element={<HomePage />} />
+                <Route path="/cadastro" element={<LandingPage />} />
+              </Routes>
+            </main>
+
+            <RightSidebar />
+          </div>
+
+          <LoginModal 
+            isOpen={isLoginModalOpen}
+            onClose={() => setIsLoginModalOpen(false)}
+            onSuccess={handleLoginSuccess}
+          />
+        </div>
       </BrowserRouter>
     </div>
   );
