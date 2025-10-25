@@ -11,23 +11,30 @@ import LandingAfterLogin from "@/pages/LandingAfterLogin";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     // Check if user is already logged in
-    const user = localStorage.getItem('user');
-    if (user) {
-      setIsLoggedIn(true);
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (e) {
+        console.error('Error parsing user data:', e);
+      }
     }
   }, []);
 
   const handleLoginSuccess = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    setIsLoggedIn(false);
+    // Reload user data from localStorage
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        setUser(JSON.parse(userData));
+      } catch (e) {
+        console.error('Error parsing user data:', e);
+      }
+    }
   };
 
   return (
