@@ -43,6 +43,15 @@ const Sidebar = () => {
     { name: 'Futsal', icon: IoFootball, path: '/futsal' },
     { name: 'MMA', icon: IoAmericanFootball, path: '/mma' },
     { name: 'Beisebol', icon: IoBaseballOutline, path: '/beisebol' },
+    { name: 'Futebol Americano', icon: IoAmericanFootball, path: '/futebol-americano' },
+    { name: 'Badminton', icon: IoTennisball, path: '/badminton' },
+    { name: 'Boxe', icon: GiBoxingGlove, path: '/boxe' },
+    { name: 'Fórmula 1', icon: GiRaceCar, path: '/formula-1' },
+    { name: 'Vôlei de Praia', icon: TbBallVolleyball, path: '/volei-praia' },
+    { name: 'Rugby', icon: GiRugbyConversion, path: '/rugby' },
+    { name: 'Motociclismo', icon: GiMotorcycle, path: '/motociclismo' },
+    { name: 'Especiais', icon: MdStar, path: '/especiais' },
+    { name: 'Handebol', icon: IoBasketball, path: '/handebol' },
   ];
 
   const filteredCategories = categories.filter(cat =>
