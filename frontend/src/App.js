@@ -63,8 +63,6 @@ function App() {
                 <Route path="/escolher-valor" element={<LandingPage />} />
               </Routes>
             </main>
-
-            <RightSidebar />
           </div>
 
           <LoginModal 
