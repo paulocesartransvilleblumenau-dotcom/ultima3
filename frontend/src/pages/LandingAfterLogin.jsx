@@ -85,55 +85,55 @@ const LandingAfterLogin = () => {
       </section>
 
       {/* How it Works */}
-      <section className="py-16 bg-gradient-to-br from-blue-900 to-blue-800">
+      <section className="py-20 bg-gradient-to-br from-[#2a4a6f] to-[#1e3a5f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-center text-white mb-12">Como Funciona</h3>
-          <div className="grid md:grid-cols-4 gap-8">
+          <h3 className="text-4xl font-bold text-center text-white mb-16">Como Funciona</h3>
+          <div className="grid md:grid-cols-4 gap-10">
             <div className="text-center">
-              <div className="bg-yellow-500 text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
                 1
               </div>
-              <h4 className="text-xl font-bold text-white mb-2">Cadastre-se</h4>
-              <p className="text-gray-300">Crie sua conta em segundos</p>
+              <h4 className="text-2xl font-bold text-white mb-3">Cadastre-se</h4>
+              <p className="text-gray-200 text-lg">Crie sua conta em segundos</p>
             </div>
             <div className="text-center">
-              <div className="bg-yellow-500 text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
                 2
               </div>
-              <h4 className="text-xl font-bold text-white mb-2">Deposite</h4>
-              <p className="text-gray-300">Adicione créditos e ganhe bônus</p>
+              <h4 className="text-2xl font-bold text-white mb-3">Deposite</h4>
+              <p className="text-gray-200 text-lg">Adicione créditos e ganhe bônus</p>
             </div>
             <div className="text-center">
-              <div className="bg-yellow-500 text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
                 3
               </div>
-              <h4 className="text-xl font-bold text-white mb-2">Aposte</h4>
-              <p className="text-gray-300">Escolha seu jogo favorito</p>
+              <h4 className="text-2xl font-bold text-white mb-3">Aposte</h4>
+              <p className="text-gray-200 text-lg">Escolha seu jogo favorito</p>
             </div>
             <div className="text-center">
-              <div className="bg-yellow-500 text-blue-900 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 text-gray-900 w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-lg">
                 4
               </div>
-              <h4 className="text-xl font-bold text-white mb-2">Ganhe</h4>
-              <p className="text-gray-300">Receba seus prêmios rapidamente</p>
+              <h4 className="text-2xl font-bold text-white mb-3">Ganhe</h4>
+              <p className="text-gray-200 text-lg">Receba seus prêmios rapidamente</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-[#0D1B3A]">
+      <section className="py-24 bg-gradient-to-br from-[#1e3a5f] to-[#2a4a6f]">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className="text-5xl font-bold text-white mb-8">
             Pronto para começar a ganhar?
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-2xl text-gray-200 mb-10">
             Faça seu primeiro depósito e aproveite o bônus de 500%!
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <button 
               onClick={() => navigate('/escolher-valor')}
-              className="bg-yellow-500 hover:bg-yellow-400 text-blue-900 px-10 py-4 rounded-xl font-bold text-xl transition transform hover:scale-105 shadow-2xl"
+              className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-gray-900 px-12 py-5 rounded-xl font-bold text-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
               data-testid="comecar-agora-btn"
             >
               COMEÇAR AGORA
