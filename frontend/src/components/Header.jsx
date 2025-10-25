@@ -109,17 +109,20 @@ const Header = ({ onLoginClick, userProp, onMenuClick }) => {
           </nav>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2 md:space-x-3">
             {user ? (
               <>
-                <div className="flex items-center space-x-2 text-white">
+                <div className="hidden md:flex items-center space-x-2 text-white">
                   <IoPersonCircle className="text-2xl text-yellow-400" />
                   <span className="text-sm font-semibold" data-testid="user-name">{user.username}</span>
+                </div>
+                <div className="md:hidden">
+                  <IoPersonCircle className="text-3xl text-yellow-400" />
                 </div>
                 <Button 
                   onClick={handleLogout}
                   variant="outline" 
-                  className="bg-red-600 text-white hover:bg-red-700 border-none"
+                  className="bg-red-600 text-white hover:bg-red-700 border-none text-xs md:text-sm px-3 md:px-4 py-2"
                   data-testid="sair-btn"
                 >
                   Sair
@@ -130,14 +133,14 @@ const Header = ({ onLoginClick, userProp, onMenuClick }) => {
                 <Button 
                   onClick={() => navigate('/cadastro')}
                   variant="outline" 
-                  className="bg-white text-[#0D1B3A] hover:bg-gray-100 border-none"
+                  className="hidden md:inline-flex bg-white text-[#0D1B3A] hover:bg-gray-100 border-none"
                   data-testid="criar-conta-btn"
                 >
                   Criar Conta
                 </Button>
                 <Button 
                   onClick={onLoginClick}
-                  className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white"
+                  className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white text-xs md:text-sm px-3 md:px-4 py-2"
                   data-testid="entrar-btn"
                 >
                   Entrar
