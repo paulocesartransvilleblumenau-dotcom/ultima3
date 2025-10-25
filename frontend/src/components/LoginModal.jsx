@@ -3,12 +3,14 @@ import { IoClose, IoEye, IoEyeOff } from 'react-icons/io5';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 const LoginModal = ({ isOpen, onClose, onSuccess }) => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
