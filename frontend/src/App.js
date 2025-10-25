@@ -16,7 +16,6 @@ import AdminPainel from "@/pages/AdminPainel";
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [user, setUser] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Check if user is already logged in
