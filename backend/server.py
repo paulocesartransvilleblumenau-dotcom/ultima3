@@ -138,24 +138,24 @@ async def save_pix_config(config: PixConfig):
 async def generate_pix_code(amount: float):
     """Generate PIX code based on configuration"""
     try:
-        from pypix import Pix
+        from pixqrcodegen import Payload
         
         config = await db.pix_config.find_one({}, {"_id": 0})
         
         if not config:
             raise HTTPException(status_code=404, detail="Configuração PIX não encontrada")
         
-        # Criar objeto Pix
-        pix = Pix(
-            key=config['chave_pix'],
-            name=config['nome_beneficiario'],
-            city=config['cidade'],
-            value=amount,
-            description="Depósito Aposta Bet Nacional"
+        # Criar payload PIX usando pixqrcodegen
+        payload = Payload(
+            nome=config['nome_beneficiario'],
+            chavepix=config['chave_pix'],
+            valor=str(amount),
+            cidade=config['cidade'],
+            txtId='***'  # Identificador da transação
         )
         
-        # Gerar payload EMV
-        pix_code = pix.payload()
+        # Gerar código PIX EMV válido
+        pix_code = payload.gerarPayload()
         
         return {
             "status": "success",
