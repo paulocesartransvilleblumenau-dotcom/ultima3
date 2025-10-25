@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
 import { IoCopy, IoCheckmarkCircle, IoTime } from 'react-icons/io5';
+import axios from 'axios';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const PagamentoPix = () => {
   const navigate = useNavigate();
