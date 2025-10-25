@@ -48,37 +48,37 @@ const LandingAfterLogin = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 bg-[#0D1B3A]">
+      <section className="py-20 bg-gradient-to-br from-[#1e3a5f] to-[#2a4a6f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 className="text-3xl font-bold text-center text-white mb-12">Por que escolher a Aposta Bet Nacional?</h3>
-          <div className="grid md:grid-cols-4 gap-6">
-            <div className="bg-blue-900/50 p-6 rounded-xl text-center border border-yellow-500/20 hover:border-yellow-500 transition">
-              <svg className="h-12 w-12 text-yellow-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 className="text-4xl font-bold text-center text-white mb-16">Por que escolher a Aposta Bet Nacional?</h3>
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-yellow-500/30 hover:border-yellow-500 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
+              <svg className="h-16 w-16 text-yellow-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
               </svg>
-              <h4 className="text-xl font-bold text-white mb-2">Pagamento Rápido</h4>
-              <p className="text-gray-300">Saques processados em minutos</p>
+              <h4 className="text-xl font-bold text-white mb-3">Pagamento Rápido</h4>
+              <p className="text-gray-200">Saques processados em minutos</p>
             </div>
-            <div className="bg-blue-900/50 p-6 rounded-xl text-center border border-yellow-500/20 hover:border-yellow-500 transition">
-              <svg className="h-12 w-12 text-yellow-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-yellow-500/30 hover:border-yellow-500 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
+              <svg className="h-16 w-16 text-yellow-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
               </svg>
-              <h4 className="text-xl font-bold text-white mb-2">Melhores Odds</h4>
-              <p className="text-gray-300">Odds competitivas do mercado</p>
+              <h4 className="text-xl font-bold text-white mb-3">Melhores Odds</h4>
+              <p className="text-gray-200">Odds competitivas do mercado</p>
             </div>
-            <div className="bg-blue-900/50 p-6 rounded-xl text-center border border-yellow-500/20 hover:border-yellow-500 transition">
-              <svg className="h-12 w-12 text-yellow-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-yellow-500/30 hover:border-yellow-500 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
+              <svg className="h-16 w-16 text-yellow-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <h4 className="text-xl font-bold text-white mb-2">Ao Vivo</h4>
-              <p className="text-gray-300">Aposte durante os jogos</p>
+              <h4 className="text-xl font-bold text-white mb-3">Ao Vivo</h4>
+              <p className="text-gray-200">Aposte durante os jogos</p>
             </div>
-            <div className="bg-blue-900/50 p-6 rounded-xl text-center border border-yellow-500/20 hover:border-yellow-500 transition">
-              <svg className="h-12 w-12 text-yellow-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-yellow-500/30 hover:border-yellow-500 hover:bg-white/15 transition-all duration-300 transform hover:scale-105">
+              <svg className="h-16 w-16 text-yellow-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
               </svg>
-              <h4 className="text-xl font-bold text-white mb-2">100% Seguro</h4>
-              <p className="text-gray-300">Seus dados protegidos</p>
+              <h4 className="text-xl font-bold text-white mb-3">100% Seguro</h4>
+              <p className="text-gray-200">Seus dados protegidos</p>
             </div>
           </div>
         </div>
