@@ -53,10 +53,17 @@ function App() {
           {/* Main App Routes (com layout) */}
           <Route path="*" element={
             <div className="min-h-screen bg-[#0D1B3A]">
-              <Header onLoginClick={() => setIsLoginModalOpen(true)} userProp={user} />
+              <Header 
+                onLoginClick={() => setIsLoginModalOpen(true)} 
+                userProp={user}
+                onMenuClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              />
               
               <div className="flex">
-                <Sidebar />
+                <Sidebar 
+                  isOpen={isSidebarOpen} 
+                  onClose={() => setIsSidebarOpen(false)}
+                />
                 
                 <main className="flex-1 overflow-y-auto">
                   <Routes>
