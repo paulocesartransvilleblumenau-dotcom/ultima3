@@ -59,19 +59,19 @@ function App() {
                 
                 <main className="flex-1 overflow-y-auto">
                   <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
                     <Route path="/landing" element={<LandingAfterLogin />} />
                     <Route path="/escolher-valor" element={<EscolherValor />} />
                     <Route path="/pagamento-pix" element={<PagamentoPix />} />
-                    <Route path="/esportes" element={<HomePage />} />
-                    <Route path="/ao-vivo" element={<HomePage />} />
-                    <Route path="/melhores-listas" element={<HomePage />} />
-                    <Route path="/futebol" element={<HomePage />} />
-                    <Route path="/campeonatos" element={<HomePage />} />
-                    <Route path="/cassino-ao-vivo" element={<HomePage />} />
-                    <Route path="/cassino" element={<HomePage />} />
-                    <Route path="/aviator" element={<HomePage />} />
-                    <Route path="/mines" element={<HomePage />} />
+                    <Route path="/esportes" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/ao-vivo" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/melhores-listas" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/futebol" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/campeonatos" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/cassino-ao-vivo" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/cassino" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/aviator" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
+                    <Route path="/mines" element={<HomePage onLoginClick={() => setIsLoginModalOpen(true)} />} />
                     <Route path="/cadastro" element={<LandingPage />} />
                   </Routes>
                 </main>
