@@ -38,6 +38,7 @@ pixqrcodegen @ git+https://github.com/Alexsussa/pixqrcodegen.git@292362aaa452e7b
 platformdirs==4.5.0
 pluggy==1.6.0
 pyasn1==0.6.1
+pybrcode==1.1
 pycodestyle==2.14.0
 pycparser==2.23
 pydantic==2.12.3
@@ -69,6 +70,7 @@ typer==0.20.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2025.2
+Unidecode==1.4.0
 urllib3==2.5.0
 uvicorn==0.25.0
 watchfiles==1.1.1
