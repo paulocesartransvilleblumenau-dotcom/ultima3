@@ -1,19 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
-const HomePage = () => {
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    // Abrir modal de login (você pode conectar com o LoginModal do App.js)
-    navigate('/landing');
-  };
-
-  const handleCadastro = () => {
-    navigate('/cadastro');
-  };
-
+const HomePage = ({ onLoginClick }) => {
   return (
     <div className="flex-1 p-8" data-testid="home-page">
       <div className="max-w-6xl mx-auto">
@@ -43,18 +31,11 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Botões Centralizados */}
-        <div className="flex justify-center items-center gap-6 py-12">
+        {/* Botão Entrar Centralizado */}
+        <div className="flex justify-center items-center py-12">
           <Button
-            onClick={handleCadastro}
-            className="bg-white text-[#0D1B3A] hover:bg-gray-100 text-xl font-bold px-12 py-6 rounded-xl"
-            data-testid="criar-conta-home-btn"
-          >
-            Criar Conta
-          </Button>
-          <Button
-            onClick={handleLogin}
-            className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white text-xl font-bold px-12 py-6 rounded-xl"
+            onClick={onLoginClick}
+            className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white text-2xl font-bold px-16 py-8 rounded-xl shadow-2xl"
             data-testid="entrar-home-btn"
           >
             Entrar
