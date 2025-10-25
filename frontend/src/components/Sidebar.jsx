@@ -15,10 +15,15 @@ import {
 import { 
   GiTigerHead,
   GiBasketballBall,
-  GiSoccerBall
+  GiSoccerBall,
+  GiBoxingGlove,
+  GiRaceCar,
+  GiMotorcycle,
+  GiRugbyConversion
 } from 'react-icons/gi';
-import { MdSportsVolleyball, MdTableRestaurant } from 'react-icons/md';
+import { MdSportsVolleyball, MdStar } from 'react-icons/md';
 import { FaTableTennis } from 'react-icons/fa';
+import { TbBallVolleyball } from 'react-icons/tb';
 
 const Sidebar = () => {
   const [searchQuery, setSearchQuery] = useState('');
