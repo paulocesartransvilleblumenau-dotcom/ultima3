@@ -3,22 +3,47 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { IoPersonCircle } from 'react-icons/io5';
 
-const Header = ({ onLoginClick }) => {
+const Header = ({ onLoginClick, userProp }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check if user is logged in
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      try {
-        const parsedUser = JSON.parse(userData);
-        setUser(parsedUser);
-      } catch (e) {
-        console.error('Error parsing user data:', e);
+    // Function to check user from localStorage
+    const checkUser = () => {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        try {
+          const parsedUser = JSON.parse(userData);
+          setUser(parsedUser);
+        } catch (e) {
+          console.error('Error parsing user data:', e);
+        }
+      } else {
+        setUser(null);
       }
-    }
+    };
+
+    // Check initially
+    checkUser();
+
+    // Listen for storage events (when localStorage changes)
+    window.addEventListener('storage', checkUser);
+    
+    // Also check periodically (for same-window updates)
+    const interval = setInterval(checkUser, 1000);
+
+    return () => {
+      window.removeEventListener('storage', checkUser);
+      clearInterval(interval);
+    };
   }, []);
+
+  // Update user when userProp changes
+  useEffect(() => {
+    if (userProp) {
+      setUser(userProp);
+    }
+  }, [userProp]);
 
   const handleLogout = () => {
     if (window.confirm('Deseja realmente sair?')) {
