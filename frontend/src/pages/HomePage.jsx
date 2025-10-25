@@ -1,45 +1,155 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { IoEye, IoEyeOff } from 'react-icons/io5';
+import axios from 'axios';
 
-const HomePage = ({ onLoginClick }) => {
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
+
+const HomePage = () => {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    
+    if (!formData.username || !formData.password) {
+      setError('Por favor, preencha todos os campos');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      // Log access
+      await axios.post(`${API}/log-access`, {
+        username: formData.username
+      });
+
+      // Salvar usuário no localStorage
+      localStorage.setItem('user', JSON.stringify({
+        username: formData.username,
+        loggedIn: true
+      }));
+
+      // Redirecionar para landing
+      navigate('/landing');
+    } catch (err) {
+      console.error('Erro ao fazer login:', err);
+      setError('Erro ao fazer login. Tente novamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRecoverPassword = () => {
+    alert('Entre em contato com o suporte para recuperar sua senha.');
+  };
+
   return (
-    <div className="flex-1 p-8" data-testid="home-page">
-      <div className="max-w-6xl mx-auto">
-        {/* Título */}
-        <h1 className="text-white text-4xl font-bold mb-6 text-center">
-          Bem-vindo ao ApostaBet Nacional
-        </h1>
-        
-        {/* Cards de Categorias */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {/* Card 1 */}
-          <div className="bg-[#1a3a52] rounded-lg p-6 hover:bg-[#2a4a62] transition-colors cursor-pointer">
-            <h3 className="text-white text-xl font-semibold mb-3">Esportes</h3>
-            <p className="text-gray-300 text-sm">Aposte nos seus esportes favoritos com as melhores odds do mercado.</p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-[#1a3a52] rounded-lg p-6 hover:bg-[#2a4a62] transition-colors cursor-pointer">
-            <h3 className="text-white text-xl font-semibold mb-3">Cassino</h3>
-            <p className="text-gray-300 text-sm">Divirta-se com centenas de jogos de cassino online.</p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-[#1a3a52] rounded-lg p-6 hover:bg-[#2a4a62] transition-colors cursor-pointer">
-            <h3 className="text-white text-xl font-semibold mb-3">Ao Vivo</h3>
-            <p className="text-gray-300 text-sm">Acompanhe e aposte em eventos ao vivo em tempo real.</p>
+    <div className="flex-1 flex items-center justify-center p-8 min-h-[calc(100vh-64px)]" data-testid="home-page">
+      <div className="max-w-md w-full">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <div className="text-4xl font-bold lowercase mb-2">
+            <span className="text-[#FFD700]">aposta</span>
+            <span className="text-white">bet</span>
+            <span className="text-white">nacional</span>
           </div>
         </div>
 
-        {/* Botão Entrar Centralizado */}
-        <div className="flex justify-center items-center py-12">
-          <Button
-            onClick={onLoginClick}
-            className="bg-[#1E5A9E] hover:bg-[#2568b0] text-white text-2xl font-bold px-16 py-8 rounded-xl shadow-2xl"
-            data-testid="entrar-home-btn"
-          >
-            Entrar
-          </Button>
+        {/* Card de Login */}
+        <div className="bg-[#1a3a52] rounded-2xl p-8 shadow-2xl">
+          {/* Título */}
+          <h2 className="text-white text-2xl font-semibold mb-8 text-center">
+            Junte-se a nós
+          </h2>
+
+          {/* Error Message */}
+          {error && (
+            <div className="bg-red-500 bg-opacity-20 border border-red-500 text-red-200 px-4 py-3 rounded-lg mb-4 text-center text-sm">
+              {error}
+            </div>
+          )}
+
+          {/* Formulário */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Campo CPF/E-mail/Usuário */}
+            <div>
+              <Label htmlFor="username" className="text-white text-sm mb-2 block">
+                Digite seu CPF, e-mail ou Usuário
+              </Label>
+              <Input
+                id="username"
+                type="text"
+                placeholder="CPF, e-mail ou Usuário"
+                value={formData.username}
+                onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                className="w-full bg-white text-gray-900 border-none py-6 text-base"
+                data-testid="username-input"
+                required
+              />
+            </div>
+
+            {/* Campo Senha */}
+            <div>
+              <Label htmlFor="password" className="text-white text-sm mb-2 block">
+                Senha
+              </Label>
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Senha"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full bg-white text-gray-900 border-none pr-10 py-6 text-base"
+                  data-testid="password-input"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  data-testid="toggle-password-btn"
+                >
+                  {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Esqueci a Senha */}
+            <div className="text-left">
+              <button
+                type="button"
+                onClick={handleRecoverPassword}
+                className="text-white hover:text-[#FFD700] text-sm transition-colors underline"
+                data-testid="forgot-password-btn"
+              >
+                Esqueci a Senha
+              </button>
+            </div>
+
+            {/* Botão Entrar */}
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-[#1E5A9E] hover:bg-[#2568b0] text-white py-6 text-lg font-semibold rounded-xl"
+              data-testid="login-submit-btn"
+            >
+              {isLoading ? 'Entrando...' : 'Entrar'}
+            </Button>
+          </form>
         </div>
       </div>
     </div>
