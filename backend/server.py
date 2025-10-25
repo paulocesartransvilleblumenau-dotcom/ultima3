@@ -91,6 +91,71 @@ async def log_access(data: dict):
         logger.error(f"Error logging access: {e}")
         return {"status": "error", "message": str(e)}
 
+# Admin Routes
+@api_router.post("/admin/login")
+async def admin_login(credentials: AdminLogin):
+    """Admin login endpoint"""
+    # Senha padrão: admin123 (em produção, usar hash)
+    if credentials.username == "admin" and credentials.password == "admin123":
+        return {
+            "status": "success",
+            "token": "admin_token_" + str(uuid.uuid4()),
+            "message": "Login realizado com sucesso"
+        }
+    else:
+        raise HTTPException(status_code=401, detail="Credenciais inválidas")
+
+@api_router.get("/admin/pix-config")
+async def get_pix_config():
+    """Get current PIX configuration"""
+    try:
+        config = await db.pix_config.find_one({}, {"_id": 0})
+        if config:
+            return {"status": "success", "data": config}
+        else:
+            return {"status": "success", "data": None}
+    except Exception as e:
+        logger.error(f"Error getting PIX config: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/admin/pix-config")
+async def save_pix_config(config: PixConfig):
+    """Save PIX configuration"""
+    try:
+        config_dict = config.dict()
+        config_dict["updated_at"] = datetime.now(timezone.utc).isoformat()
+        
+        # Upsert configuration
+        await db.pix_config.delete_many({})
+        await db.pix_config.insert_one(config_dict)
+        
+        return {"status": "success", "message": "Configuração PIX salva com sucesso"}
+    except Exception as e:
+        logger.error(f"Error saving PIX config: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/pix/generate-code")
+async def generate_pix_code(amount: float):
+    """Generate PIX code based on configuration"""
+    try:
+        config = await db.pix_config.find_one({}, {"_id": 0})
+        
+        if not config:
+            raise HTTPException(status_code=404, detail="Configuração PIX não encontrada")
+        
+        # Gerar código PIX EMV (simplificado)
+        pix_code = f"00020126580014br.gov.bcb.pix0136{config['chave_pix']}520400005303986540{amount:.2f}5802BR59{config['nome_beneficiario'][:25]}60{config['cidade'][:15]}6304"
+        
+        return {
+            "status": "success",
+            "pix_code": pix_code,
+            "chave_pix": config['chave_pix'],
+            "nome_beneficiario": config['nome_beneficiario']
+        }
+    except Exception as e:
+        logger.error(f"Error generating PIX code: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Include the router in the main app
 app.include_router(api_router)
 
