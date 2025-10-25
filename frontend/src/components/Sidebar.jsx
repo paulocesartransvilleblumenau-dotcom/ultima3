@@ -18,11 +18,10 @@ import {
   GiSoccerBall,
   GiBoxingGlove,
   GiRaceCar,
-  GiMotorcycle,
   GiRugbyConversion
 } from 'react-icons/gi';
-import { MdSportsVolleyball, MdStar } from 'react-icons/md';
-import { FaTableTennis } from 'react-icons/fa';
+import { MdSportsVolleyball, MdStar, MdSportsMo torSports } from 'react-icons/md';
+import { FaTableTennis, FaMotorcycle } from 'react-icons/fa';
 import { TbBallVolleyball } from 'react-icons/tb';
 
 const Sidebar = () => {
