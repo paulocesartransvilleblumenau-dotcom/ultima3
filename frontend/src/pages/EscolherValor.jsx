@@ -99,7 +99,7 @@ const EscolherValor = () => {
         </div>
 
         {/* Value Options */}
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           {presetValues.map((preset) => (
             <div
               key={preset.amount}
